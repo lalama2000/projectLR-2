@@ -1,7 +1,7 @@
 .logo {
     text-align: left;
     padding-left: 5%;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     height: 77px;
 
 
@@ -16,7 +16,8 @@
 }
 
 nav {
-    background-color: #ffffff;
+    background-color: rgb(255, 255, 255);
+    ;
     display: flex;
     justify-content: space-between;
 }
@@ -68,11 +69,11 @@ ul {
 }
 
 .search {
+    text-align: center;
     width: 80%;
     align-items: center;
-    padding-top: 26px;
     padding-left: 300px;
-    padding-bottom: 24px;
+    padding-bottom: 60px;
 }
 
 .searchItem {

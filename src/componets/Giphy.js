@@ -3,6 +3,8 @@ import { saveAs } from "file-saver"
 import axios from "axios"
 import Navbar from "./Navbar"
 import Loader from "./Loader"
+import styles from "./navbar.module.css"
+import { FaSearch } from "react-icons/fa"
 
 const Giphy = () => {
   const [data, setData] = useState([])
@@ -52,7 +54,6 @@ const Giphy = () => {
       )
     })
   }
-
   const handleSearchChange = event => {
     setSearch(event.target.value)
   }
@@ -78,12 +79,20 @@ const Giphy = () => {
   return (
     <div className="m-2">
       <Navbar />
-      <form className="form-inline justify-content-center m-2 ">
-        <input value={search} onChange={handleSearchChange} type="text" placeholder="search" className="form-control" />
-        <button onClick={handleSubmit} type="submit" className="btn btn-secondary mx-2">
-          Go
+      <div className={styles.search}>
+        <input
+          value={search}
+          onChange={handleSearchChange}
+          type="text"
+          className={styles.searchItem}
+          placeholder="Search Gifs.."
+          name="search"
+        />
+        <button onClick={handleSubmit} type="submit" className={styles.searchButton}>
+          <i class={FaSearch}></i>
+          <FaSearch />
         </button>
-      </form>
+      </div>
 
       <div className="container gifs">{renderGifs()}</div>
     </div>
