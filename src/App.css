@@ -1,5 +1,6 @@
 body {
-  background-color: rgb(255, 255, 255);
+  background-color: #0D0C3F;
+
 }
 
 .gifs {
@@ -8,10 +9,14 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
 }
 
 .gif {
   padding: 0 2px;
+  border: 10px;
+
+
 }
 
 .loader {

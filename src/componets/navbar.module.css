@@ -11,8 +11,23 @@
     color: #0D0C3F;
     padding-top: 22%;
     font-weight: bold;
+}
 
+.navbarhome a {
+    display: flex;
+    text-decoration: none;
+    margin-right: 30px;
+    /* font-weight: 555; */
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    color: #0D0C3F;
+    padding-top: 39%;
+    text-align: left;
+}
 
+.home {
+    text-align: left;
+    left: 30px;
 }
 
 nav {
@@ -45,6 +60,7 @@ li {
     position: relative;
     padding: 10px 20px;
     bottom: 0;
+
 }
 
 li::after {

@@ -1,49 +1,45 @@
-import { Form, Col, Row, Button, Alert } from "react-bootstrap"
-import Signup from "./pages/Signup"
 import { useContext } from "react"
-import ProductsContext from "./ProductsContext"
+import styles from "./singup.module.css"
+import GiphyContext from "../utils/GiphyContext"
 
-function Signup() {
+function SignUp() {
+  const { signup } = useContext(GiphyContext)
+
   return (
-    <div className="ms-4 mt-4">
-      <h1>Sign Up</h1>
-      <Form className="m-5" onSubmit={signUp}>
-        <Form.Group as={Row} className="mb-3">
-          <Form.Label column md="2">
-            User Nmae
-          </Form.Label>
-          <Col md="6">
-            <Form.Control name="firstName" type="text" required />
-          </Col>
-        </Form.Group>
-        <Form.Group as={Row} className="mb-3">
-          <Form.Label column md="2">
-            Email
-          </Form.Label>
-          <Col md="6">
-            <Form.Control type="email" name="email" required />
-          </Col>
-        </Form.Group>
+    <div className={styles.Form}>
+      <h3>Create an Account!</h3>
+      <form className="sign-form" onSubmit={signup}>
+        <label>
+          Name
+          <br />
+          <input type="text" name="Name" required />
+        </label>
+        <label>
+          Name
+          <br />
+          <input type="text" name="LName" required />
+        </label>
 
-        <Form.Group as={Row} className="mb-3">
-          <Form.Label column md="2">
-            Password
-          </Form.Label>
-          <Col md="6">
-            <Form.Control type="password" name="password" required />
-          </Col>
-        </Form.Group>
-
-        <Row>
-          <Col md="8">{errorSignup !== null ? <Alert variant="danger">{errorSignup}</Alert> : null}</Col>
-        </Row>
-        <Form.Group as={Row} className="my-4">
-          <Col md={{ span: 10, offset: 2 }}>
-            <Button type="submit">Sign up</Button>
-          </Col>
-        </Form.Group>
-      </Form>
+        <label>
+          Email:
+          <br />
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          Password:
+          <br />
+          <input type="password" name="password" required />
+        </label>
+        <label>
+          avtar
+          <br />
+          <input type="url" name="image" required />
+        </label>
+        <br />
+        <button type="submit">Sign Up!</button>
+      </form>
     </div>
   )
 }
-export default Signup
+
+export default SignUp

@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { saveAs } from "file-saver"
 import axios from "axios"
-import Navbar from "./Navbar"
 import Loader from "./Loader"
 import styles from "./navbar.module.css"
 import { FaSearch } from "react-icons/fa"
-
-///rtyuioohgfdghjklftdfiouf/////
+import GiphyContext from "../utils/GiphyContext"
 
 const Giphy = () => {
   const [data, setData] = useState([])
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const { getProfile } = useContext(GiphyContext)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +32,10 @@ const Giphy = () => {
     }
 
     fetchData()
+
+    if (localStorage.tokenPost) {
+      getProfile()
+    }
   }, [])
 
   const renderGifs = () => {
@@ -43,15 +46,7 @@ const Giphy = () => {
       return (
         <div key={el.id} className="gif">
           <img src={el.images.fixed_height.url} />
-          <button
-            onClick={() =>
-              saveAs(
-                "https://media1.giphy.com/media/1Y9mflWqoSy13wAfQR/giphy.gif?cid=ecf05e4790d062e800b7122c1301c4c2dbb0615825f50751&rid=giphy.gif&ct=g"
-              )
-            }
-          >
-            Download!
-          </button>
+          <button onClick={() => saveAs(el.images.fixed_height.url)}>Download!</button>
         </div>
       )
     })
@@ -80,7 +75,6 @@ const Giphy = () => {
 
   return (
     <div className="m-2">
-      <Navbar />
       <div className={styles.search}>
         <input
           value={search}
