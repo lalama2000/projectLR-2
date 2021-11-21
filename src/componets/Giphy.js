@@ -6,6 +6,8 @@ import Loader from "./Loader"
 import styles from "./navbar.module.css"
 import { FaSearch } from "react-icons/fa"
 
+///rtyuioohgfdghjklftdfiouf/////
+
 const Giphy = () => {
   const [data, setData] = useState([])
   const [search, setSearch] = useState("")
