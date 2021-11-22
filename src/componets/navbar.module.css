@@ -5,12 +5,19 @@
     height: 77px;
 
 
+
 }
 
 .h1 {
     color: #0D0C3F;
     padding-top: 22%;
     font-weight: bold;
+    text-decoration: none;
+    font-size: 50px;
+}
+
+.logo a:hover {
+    color: gray;
 }
 
 .navbarhome a {

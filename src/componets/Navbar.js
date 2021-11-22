@@ -1,7 +1,10 @@
 import styles from "./navbar.module.css"
 import { Link } from "react-router-dom"
+import { useContext } from "react"
+import GiphyContext from "../utils/GiphyContext"
 
 function NavbarItem() {
+  const { logout } = useContext(GiphyContext)
   return (
     <nav>
       <div className={styles.logo}>
@@ -9,20 +12,16 @@ function NavbarItem() {
           Giphy
         </Link>
       </div>
-      <ul className={styles.navbarhome}>
-        <li>
-          <Link to={"./Home"} className={styles.home}>
-            Home
-          </Link>
-        </li>
-      </ul>
+
       {localStorage.tokenPost ? (
         <ul className={styles.navbaritem}>
           <li>
             <Link to={"./Profile"}>Profile </Link>
           </li>
           <li>
-            <Link to={"./Home"}>Logout </Link>
+            <Link to={"./Home"} onClick={logout}>
+              Logout
+            </Link>
           </li>
         </ul>
       ) : (

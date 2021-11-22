@@ -32,25 +32,45 @@ const Giphy = () => {
     }
 
     fetchData()
-
-    if (localStorage.tokenPost) {
-      getProfile()
-    }
   }, [])
 
   const renderGifs = () => {
     if (isLoading) {
       return <Loader />
     }
+
     return data.map(el => {
       return (
         <div key={el.id} className="gif">
           <img src={el.images.fixed_height.url} />
-          <button onClick={() => saveAs(el.images.fixed_height.url)}>Download!</button>
+          {localStorage.tokenPost ? (
+            // <button onClick={() => saveAs(el.images.fixed_height.url)}>Download!</button>
+            <button onClick={() => saveGif(el)}>save!</button>
+          ) : null}
         </div>
       )
     })
   }
+
+  const saveGif = async el => {
+    console.log(el)
+    try {
+      const body = {
+        title: el.title,
+        url: el.url,
+      }
+      console.log(body)
+      await axios.post("https://vast-chamber-06347.herokuapp.com/api/v2/giphy-423/items", body, {
+        headers: {
+          Authorization: localStorage.tokenPost,
+        },
+      })
+      console.log("dign succses")
+    } catch (error) {
+      console.log(error?.response?.data)
+    }
+  }
+
   const handleSearchChange = event => {
     setSearch(event.target.value)
   }

@@ -1,32 +1,31 @@
 import { Card, Col, Button } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { useContext, useState } from "react"
+import GiphyContext from "../utils/GiphyContext"
 
-function cardgif(props) {
+function CardGif(props) {
+  const { Gifs, inProfile } = props
+  const { deleteGifs } = useContext(GiphyContext)
+
   return (
-    <div>
+    <>
       <Col>
         <Card>
           <Card.Body>
-            <Card.Img variant="top" src={el.images.fixed_height.url} />
+            <Card.Title>
+              {Gifs._user.firstName} {Gifs._user.lastName}
+            </Card.Title>
+            <Card.Img variant="top" src={Gifs.image} />
             {inProfile ? (
-              <div>
-                <Button variant="success" className="me-2">
-                  save
+              <>
+                <Button variant="danger" onClick={deleteGifs} id={Gifs._id}>
+                  Delete
                 </Button>
-                <Button variant="success" className="me-2">
-                  Download
-                </Button>
-                <Button variant="danger">Delete</Button>
-              </div>
-            ) : (
-              <Link className="btn btn-primay" to={`/post/${post._id}`}>
-                View
-              </Link>
-            )}
+              </>
           </Card.Body>
         </Card>
       </Col>
-    </div>
+    </>
   )
 }
-export default cardgif
+
+export default PostCard

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Giphy from "./componets/Giphy"
 import "./App.css"
 import { Route, Routes, useNavigate } from "react-router"
@@ -7,10 +7,21 @@ import SignUp from "./pages/SignUp"
 import Navbar from "./componets/Navbar"
 import axios from "axios"
 import GiphyContext from "./utils/GiphyContext"
+import Profile from "./pages/Profile"
+import Home from "./pages/Home"
 
 const App = () => {
   const [profile, setProfile] = useState(null)
+  const [Gifs, setGifs] = useState([])
+  const [saveGif, setsaveGif] = useState([])
+
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (localStorage.tokenPost) {
+      getProfile()
+    }
+  }, [])
 
   const signup = async e => {
     e.preventDefault()
@@ -44,6 +55,7 @@ const App = () => {
       const response = await axios.post("https://vast-chamber-06347.herokuapp.com/api/user/auth", userBody)
       const tokenPost = response.data
       localStorage.tokenPost = tokenPost
+      getProfile()
       navigate("/Home")
     } catch (error) {
       console.log(error?.response?.data)
@@ -56,13 +68,27 @@ const App = () => {
 
   const getProfile = async () => {
     try {
-      const response = await axios.get("https://vast-chamber-06347.herokuapp.com/api/user/myprofile", {
+      const response = await axios.get("https://vast-chamber-06347.herokuapp.com/api/user/me", {
         headers: {
           Authorization: localStorage.tokenPost,
         },
       })
+      console.log(response.data)
       setProfile(response.data)
-      console.log(profile)
+    } catch (error) {
+      console.log(error?.response?.data)
+    }
+  }
+
+  const getSaveGife = async () => {
+    try {
+      const response = await axios.get("https://vast-chamber-06347.herokuapp.com/api/v2/giphy-423/items", {
+        headers: {
+          Authorization: localStorage.tokenPost,
+        },
+      })
+      console.log(response.data)
+      setsaveGif(response.data)
     } catch (error) {
       console.log(error?.response?.data)
     }
@@ -73,7 +99,9 @@ const App = () => {
     login: login,
     logout: logout,
     profile: profile,
+    Gifs: Gifs,
     getProfile: getProfile,
+    getSaveGife: getSaveGife,
   }
   return (
     <GiphyContext.Provider value={store}>
@@ -82,6 +110,7 @@ const App = () => {
         <Route path="/Home" element={<Giphy />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/Profile" element={<Profile />} />
       </Routes>
     </GiphyContext.Provider>
   )
