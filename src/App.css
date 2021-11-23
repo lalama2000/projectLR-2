@@ -9,12 +9,12 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 10px;
 
 }
 
 .gif {
   padding: 0 2px;
-  border: 10px;
 
 
 }

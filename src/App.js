@@ -13,11 +13,13 @@ import Home from "./pages/Home"
 const App = () => {
   const [profile, setProfile] = useState(null)
   const [Gifs, setGifs] = useState([])
-  const [saveGif, setsaveGif] = useState([])
+  const [phy, setphy] = useState([])
 
   const navigate = useNavigate()
 
   useEffect(() => {
+    saveGiphy()
+    getSaveGife()
     if (localStorage.tokenPost) {
       getProfile()
     }
@@ -79,7 +81,23 @@ const App = () => {
       console.log(error?.response?.data)
     }
   }
-
+  const saveGiphy = async el => {
+    try {
+      const body = {
+        title: el.images.fixed_height.url,
+      }
+      console.log(body)
+      await axios.post("https://vast-chamber-06347.herokuapp.com/api/v2/giphy-423/items", body, {
+        headers: {
+          Authorization: localStorage.tokenPost,
+        },
+      })
+      getProfile()
+      console.log("dign succses")
+    } catch (error) {
+      console.log(error?.response?.data)
+    }
+  }
   const getSaveGife = async () => {
     try {
       const response = await axios.get("https://vast-chamber-06347.herokuapp.com/api/v2/giphy-423/items", {
@@ -88,12 +106,27 @@ const App = () => {
         },
       })
       console.log(response.data)
-      setsaveGif(response.data)
+      setphy(response.data)
     } catch (error) {
       console.log(error?.response?.data)
     }
   }
-
+  const deleteGif = async e => {
+    const gifId = e.target.id
+    console.log(gifId)
+    try {
+      await axios.delete(`https://vast-chamber-06347.herokuapp.com/api/v2/giphy-423/items/${gifId}`, {
+        headers: {
+          Authorization: localStorage.tokenPost,
+        },
+      })
+      saveGiphy()
+      getProfile()
+      //getPosts()
+    } catch (error) {
+      console.log(error?.response?.data)
+    }
+  }
   const store = {
     signup: signup,
     login: login,
@@ -102,6 +135,8 @@ const App = () => {
     Gifs: Gifs,
     getProfile: getProfile,
     getSaveGife: getSaveGife,
+    deleteGif: deleteGif,
+    saveGiphy: saveGiphy,
   }
   return (
     <GiphyContext.Provider value={store}>

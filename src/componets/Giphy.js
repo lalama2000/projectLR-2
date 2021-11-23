@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react"
-import { saveAs } from "file-saver"
 import axios from "axios"
 import Loader from "./Loader"
 import styles from "./navbar.module.css"
@@ -10,7 +9,7 @@ const Giphy = () => {
   const [data, setData] = useState([])
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const { getProfile } = useContext(GiphyContext)
+  const { getProfile, saveGiphy } = useContext(GiphyContext)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,32 +42,10 @@ const Giphy = () => {
       return (
         <div key={el.id} className="gif">
           <img src={el.images.fixed_height.url} />
-          {localStorage.tokenPost ? (
-            // <button onClick={() => saveAs(el.images.fixed_height.url)}>Download!</button>
-            <button onClick={() => saveGif(el)}>save!</button>
-          ) : null}
+          {localStorage.tokenPost ? <button onClick={() => saveGiphy(el)}>save!</button> : null}
         </div>
       )
     })
-  }
-
-  const saveGif = async el => {
-    console.log(el)
-    try {
-      const body = {
-        title: el.title,
-        url: el.url,
-      }
-      console.log(body)
-      await axios.post("https://vast-chamber-06347.herokuapp.com/api/v2/giphy-423/items", body, {
-        headers: {
-          Authorization: localStorage.tokenPost,
-        },
-      })
-      console.log("dign succses")
-    } catch (error) {
-      console.log(error?.response?.data)
-    }
   }
 
   const handleSearchChange = event => {
