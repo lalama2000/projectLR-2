@@ -1,26 +1,23 @@
 import React, { useContext, useEffect, useState } from "react"
-import { saveAs } from "file-saver"
 import axios from "axios"
 import Loader from "./Loader"
 import styles from "./navbar.module.css"
 import { FaSearch } from "react-icons/fa"
-<<<<<<< Updated upstream
 import GiphyContext from "../utils/GiphyContext"
-=======
 import { useNavigate } from "react-router-dom"
 
 ///rtyuioohgfdghjklftdfiouf/////
->>>>>>> Stashed changes
 
 const Giphy = () => {
   const [data, setData] = useState([])
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-<<<<<<< Updated upstream
+
   const { getProfile } = useContext(GiphyContext)
-=======
+
   const navigate = useNavigate()
->>>>>>> Stashed changes
+
+  const { getProfile, saveGiphy } = useContext(GiphyContext)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,16 +50,13 @@ const Giphy = () => {
       return (
         <div key={el.id} className="gif">
           <img src={el.images.fixed_height.url} />
-          {localStorage.tokenPost ? (
-            // <button onClick={() => saveAs(el.images.fixed_height.url)}>Download!</button>
-            <button onClick={() => saveGif(el)}>save!</button>
-          ) : null}
+          {localStorage.tokenPost ? <button onClick={() => saveGiphy(el)}>save!</button> : null}
         </div>
       )
     })
   }
 
-<<<<<<< Updated upstream
+
   const saveGif = async el => {
     console.log(el)
     try {
@@ -77,7 +71,6 @@ const Giphy = () => {
         },
       })
       console.log("dign succses")
-=======
   const signup = async e => {
     e.preventDefault()
     try {
@@ -107,19 +100,17 @@ const Giphy = () => {
       const tokenPost = response.data
       localStorage.tokenPost = tokenPost
       navigate("/")
->>>>>>> Stashed changes
     } catch (error) {
       console.log(error?.response?.data)
     }
   }
 
-<<<<<<< Updated upstream
-=======
+
   const logout = () => {
     localStorage.removeItem("tokenPost")
   }
 
->>>>>>> Stashed changes
+
   const handleSearchChange = event => {
     setSearch(event.target.value)
   }
