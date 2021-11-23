@@ -12,6 +12,7 @@ function NavbarItem() {
           Giphy
         </Link>
       </div>
+<<<<<<< Updated upstream
 
       {localStorage.tokenPost ? (
         <ul className={styles.navbaritem}>
@@ -34,6 +35,16 @@ function NavbarItem() {
           </li>
         </ul>
       )}
+=======
+      <ul className={styles.navbaritem}>
+        <li>
+          <a href="./Signup">Signup</a>
+        </li>
+        <li>
+          <a href="/Login">Login</a>
+        </li>
+      </ul>
+>>>>>>> Stashed changes
     </nav>
   )
 }
