@@ -1,22 +1,20 @@
-body {
-  background-color: #0D0C3F;
-
-}
-
 .gifs {
   margin: 0 auto;
-  width: 80%;
   display: flex;
   flex-wrap: wrap;
+  width: 100px;
+  margin: 0 -5px;
   justify-content: center;
-  gap: 10px;
-
 }
 
 .gif {
-  padding: 0 2px;
+  padding: 20px;
 
+}
 
+.gif:hover {
+  transform: scale(1.1);
+  transition: 0.5s;
 }
 
 .loader {

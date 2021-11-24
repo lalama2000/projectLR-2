@@ -1,0 +1,53 @@
+.file {
+
+    text-align: center;
+}
+
+.avtar {
+    border-radius: 50%;
+    padding-bottom: 12px;
+}
+
+.buttonDown {
+    width: 80px;
+    font-size: 15px;
+    color: white;
+    background-color: #05478A;
+    border: white;
+    border-radius: 5px;
+    bottom: 10px;
+    margin-right: 5px;
+
+}
+
+.buttonDown:hover {
+    background-color: #3469ca
+}
+
+.buttonDown:active {
+    transform: translateY(4px);
+}
+
+.buttonDel {
+    width: 80px;
+    font-size: 15px;
+    color: white;
+    background-color: #853030;
+    border: white;
+    border-radius: 5px;
+    bottom: 10px;
+}
+
+.buttonDel:hover {
+    background-color: #ac3333
+}
+
+.buttonDel:active {
+    transform: translateY(4px);
+}
+
+.gifs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+}

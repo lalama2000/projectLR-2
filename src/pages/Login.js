@@ -6,22 +6,26 @@ function Login() {
   const { login } = useContext(GiphyContext)
 
   return (
-    <div className={styles.Form}>
-      <h3>log in</h3>
-      <form className="sign-form" onSubmit={login}>
-        <label>
-          Email:
-          <br />
+    <div>
+      <div className={styles.f1}>
+        <h2 className={styles.head}>LOG IN</h2>
+        <form className={styles.Form} onSubmit={login}>
+          <label>Email:</label>
           <input type="email" name="email" required />
-        </label>
-        <label>
-          Password:
           <br />
+          <label>Password:</label>
           <input type="password" name="password" required />
-        </label>
+          <br />
 
-        <button type="submit">Log in!</button>
-      </form>
+          <button className={styles.button} type="submit">
+            Log in
+          </button>
+        </form>
+      </div>
+      <img
+        className={styles.photo}
+        src="https://i.pinimg.com/originals/07/ee/2f/07ee2ff0d53565c402db2cdbe700ae6c.gif"
+      ></img>
     </div>
   )
 }

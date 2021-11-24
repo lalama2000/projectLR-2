@@ -8,13 +8,11 @@ import Navbar from "./componets/Navbar"
 import axios from "axios"
 import GiphyContext from "./utils/GiphyContext"
 import Profile from "./pages/Profile"
-import Home from "./pages/Home"
 
 const App = () => {
   const [profile, setProfile] = useState(null)
-  const [Gifs, setGifs] = useState([])
-  const [phy, setphy] = useState([])
-
+  const [Gifs] = useState([])
+  const [setphy] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -122,7 +120,6 @@ const App = () => {
       })
       saveGiphy()
       getProfile()
-      //getPosts()
     } catch (error) {
       console.log(error?.response?.data)
     }

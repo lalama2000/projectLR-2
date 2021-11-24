@@ -4,140 +4,64 @@ import Loader from "./Loader"
 import styles from "./navbar.module.css"
 import { FaSearch } from "react-icons/fa"
 import GiphyContext from "../utils/GiphyContext"
-import { useNavigate } from "react-router-dom"
-
-///rtyuioohgfdghjklftdfiouf/////
 
 const Giphy = () => {
   const [data, setData] = useState([])
   const [search, setSearch] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-
-  const { getProfile } = useContext(GiphyContext)
-
-  const navigate = useNavigate()
-
   const { getProfile, saveGiphy } = useContext(GiphyContext)
-
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true)
-
       try {
         const results = await axios("https://api.giphy.com/v1/gifs/trending", {
           params: {
             api_key: "W1BUNqPdGTq46JfpGyJb7EgwqCdBy7yJ",
-            limit: 100,
           },
         })
-
         console.log(results)
         setData(results.data.data)
+        setIsLoading(false)
       } catch (err) {}
-
       setIsLoading(false)
     }
-
     fetchData()
   }, [])
-
   const renderGifs = () => {
     if (isLoading) {
       return <Loader />
     }
-
     return data.map(el => {
       return (
         <div key={el.id} className="gif">
           <img src={el.images.fixed_height.url} />
-          {localStorage.tokenPost ? <button onClick={() => saveGiphy(el)}>save!</button> : null}
+          <div className={styles.positon}>
+            {localStorage.tokenPost ? (
+              <button className={styles.buttonSav} onClick={() => saveGiphy(el)}>
+                Save
+              </button>
+            ) : null}
+          </div>
         </div>
       )
     })
   }
-
-
-  const saveGif = async el => {
-    console.log(el)
-    try {
-      const body = {
-        title: el.title,
-        url: el.url,
-      }
-      console.log(body)
-      await axios.post("https://vast-chamber-06347.herokuapp.com/api/v2/giphy-423/items", body, {
-        headers: {
-          Authorization: localStorage.tokenPost,
-        },
-      })
-      console.log("dign succses")
-  const signup = async e => {
-    e.preventDefault()
-    try {
-      const form = e.target
-      const userBody = {
-        name: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-        avtar: form.elements.avtar.value,
-      }
-      await axios.post("https://vast-chamber-06347.herokuapp.com/api/user", userBody)
-      console.log("dign succses")
-      navigate("/login")
-    } catch (error) {
-      console.log(error.response.data)
-    }
-  }
-  const login = async e => {
-    e.preventDefault()
-    try {
-      const form = e.target
-      const userBody = {
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      }
-      const response = await axios.post("https://vast-chamber-06347.herokuapp.com/api/user/auth", userBody)
-      const tokenPost = response.data
-      localStorage.tokenPost = tokenPost
-      navigate("/")
-    } catch (error) {
-      console.log(error?.response?.data)
-    }
-  }
-
-
-  const logout = () => {
-    localStorage.removeItem("tokenPost")
-  }
-
-
   const handleSearchChange = event => {
     setSearch(event.target.value)
   }
-
   const handleSubmit = async event => {
     event.preventDefault()
     setIsLoading(true)
-
     try {
       const results = await axios("https://api.giphy.com/v1/gifs/search", {
         params: {
           api_key: "W1BUNqPdGTq46JfpGyJb7EgwqCdBy7yJ",
           q: search,
-          limit: 100,
         },
       })
       setData(results.data.data)
     } catch (err) {}
-
     setIsLoading(false)
-  }
-  const store = {
-    // profile: profile,
-    signup: signup,
-    login: login,
-    // logout: logout,
-    // deleteGif: deleteGif,
   }
   return (
     <div className="m-2">
@@ -159,5 +83,4 @@ const Giphy = () => {
     </div>
   )
 }
-
 export default Giphy

@@ -6,38 +6,38 @@ function SignUp() {
   const { signup } = useContext(GiphyContext)
 
   return (
-    <div className={styles.Form}>
-      <h3>Create an Account!</h3>
-      <form className="sign-form" onSubmit={signup}>
-        <label>
-          Name
+    <div>
+      <div className={styles.f1}>
+        <h2 className={styles.head}>SIGN UP!</h2>
+        <form className={styles.Form} onSubmit={signup}>
+          <label>First Name:</label>
+          <input type="text" name="Name" placeholder="Your first name.." required />
           <br />
-          <input type="text" name="Name" required />
-        </label>
-        <label>
-          Name
+          <label>Last Name:</label>
+          <input type="text" name="LName" placeholder="Your last name.." required />
           <br />
-          <input type="text" name="LName" required />
-        </label>
 
-        <label>
-          Email:
-          <br />
+          <label>Email:</label>
           <input type="email" name="email" required />
-        </label>
-        <label>
-          Password:
           <br />
+
+          <label>Password:</label>
           <input type="password" name="password" required />
-        </label>
-        <label>
-          avtar
           <br />
+
+          <label>Avtar:</label>
           <input type="url" name="image" required />
-        </label>
-        <br />
-        <button type="submit">Sign Up!</button>
-      </form>
+          <br />
+
+          <button className={styles.button} type="submit">
+            Sign Up
+          </button>
+        </form>
+      </div>
+      <img
+        className={styles.photo}
+        src="https://i.pinimg.com/originals/4b/74/bb/4b74bbf5197ab483c311f6cb078c3ddb.gif"
+      ></img>
     </div>
   )
 }

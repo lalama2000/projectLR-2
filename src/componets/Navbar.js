@@ -9,10 +9,13 @@ function NavbarItem() {
     <nav>
       <div className={styles.logo}>
         <Link className={styles.h1} to="/Home">
-          Giphy
+          <span className={styles.span1}>G</span>
+          <span className={styles.span2}>I</span>
+          <span className={styles.span3}>P</span>
+          <span className={styles.span4}>H</span>
+          <span className={styles.span5}>Y</span>
         </Link>
       </div>
-<<<<<<< Updated upstream
 
       {localStorage.tokenPost ? (
         <ul className={styles.navbaritem}>
@@ -35,16 +38,6 @@ function NavbarItem() {
           </li>
         </ul>
       )}
-=======
-      <ul className={styles.navbaritem}>
-        <li>
-          <a href="./Signup">Signup</a>
-        </li>
-        <li>
-          <a href="/Login">Login</a>
-        </li>
-      </ul>
->>>>>>> Stashed changes
     </nav>
   )
 }
